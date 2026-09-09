@@ -1,0 +1,103 @@
+{
+  "version": "0.1",
+  "task": "BOLT_ATTRIBUTE_EXTRACTION",
+  "language": "ko",
+  "system_instruction": "너는 볼트 개발의뢰 문장에서 지정된 네 가지 속성만 추출하는 정보 추출기다. 제조 규칙이나 일반 지식을 이용해 문장에 없는 값을 추측하지 않는다. 출력은 지정된 JSON 객체 하나만 반환한다.",
+  "rules": [
+    "추출 대상은 diameter_mm, length_mm, strength_grade, surface_treatment 네 필드뿐이다.",
+    "문장에 값이 명시되어 있지 않으면 null을 반환한다.",
+    "문장 표현이 애매하여 하나의 값으로 확정할 수 없으면 null을 반환한다.",
+    "허용 목록에 없는 값을 가장 가까운 값으로 바꾸지 않는다. 이 경우 null을 반환한다.",
+    "M20x80, M20*80, M20×80은 diameter_mm=20, length_mm=80으로 해석한다.",
+    "20파이, 20Φ, 20Ø는 diameter_mm=20으로 정규화한다.",
+    "L80, 80L, 길이80은 length_mm=80으로 정규화한다.",
+    "8.8급, G8.8, class 8.8은 strength_grade='8.8'로 정규화한다. 10.9와 12.9도 동일하다.",
+    "무도금, no coating, coating none, 표면처리X는 surface_treatment='NONE'으로 정규화한다.",
+    "아연도금, zinc, Zn, ZN, zinc plated는 surface_treatment='ZINC_PLATED'로 정규화한다.",
+    "볼트의 자재, 공정, 피치, 수량 등 다른 정보는 출력하지 않는다.",
+    "설명 문장, Markdown, 코드블록 없이 JSON 객체만 반환한다."
+  ],
+  "allowed_values": {
+    "diameter_mm": [
+      8,
+      10,
+      12,
+      16,
+      20,
+      null
+    ],
+    "length_mm": [
+      30,
+      50,
+      60,
+      80,
+      100,
+      120,
+      null
+    ],
+    "strength_grade": [
+      "8.8",
+      "10.9",
+      "12.9",
+      null
+    ],
+    "surface_treatment": [
+      "NONE",
+      "ZINC_PLATED",
+      null
+    ]
+  },
+  "few_shot_examples": [
+    {
+      "input": "M10×50 규격의 8.8급 아연도금 육각볼트 검토 요청",
+      "output": {
+        "diameter_mm": 10,
+        "length_mm": 50,
+        "strength_grade": "8.8",
+        "surface_treatment": "ZINC_PLATED"
+      }
+    },
+    {
+      "input": "16Φ-60L / class10.9 / zinc",
+      "output": {
+        "diameter_mm": 16,
+        "length_mm": 60,
+        "strength_grade": "10.9",
+        "surface_treatment": "ZINC_PLATED"
+      }
+    },
+    {
+      "input": "M12*80 G10.9 no coating",
+      "output": {
+        "diameter_mm": 12,
+        "length_mm": 80,
+        "strength_grade": "10.9",
+        "surface_treatment": "NONE"
+      }
+    },
+    {
+      "input": "M10×50 아연도금 육각볼트 요청",
+      "output": {
+        "diameter_mm": 10,
+        "length_mm": 50,
+        "strength_grade": null,
+        "surface_treatment": "ZINC_PLATED"
+      }
+    },
+    {
+      "input": "12.9급 아연도금 육각볼트 요청",
+      "output": {
+        "diameter_mm": null,
+        "length_mm": null,
+        "strength_grade": "12.9",
+        "surface_treatment": "ZINC_PLATED"
+      }
+    }
+  ],
+  "output_format": {
+    "diameter_mm": "integer|null",
+    "length_mm": "integer|null",
+    "strength_grade": "string|null",
+    "surface_treatment": "string|null"
+  }
+}

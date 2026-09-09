@@ -1,0 +1,1020 @@
+{
+  "dataset_name": "bolt_pilot_v0_1",
+  "version": "0.1",
+  "purpose": "시스템 A/B/C 구현 전 전체 파이프라인 검증용 Pilot 데이터",
+  "is_final_test": false,
+  "notes": [
+    "Pilot의 표기 변형은 공개 표현으로 간주한다.",
+    "Pilot 결과를 보고 규칙, 스키마, 프롬프트, 정규식을 수정할 수 있다.",
+    "최종 Test용 비공개 표현은 Pilot 이후 별도 파일로 관리한다.",
+    "최종 Test 생성 후에는 규칙, 프롬프트, 정규식을 고정한다."
+  ],
+  "summary": {
+    "total": 30,
+    "NORMAL": 10,
+    "VARIANT": 10,
+    "MISSING": 10
+  },
+  "items": [
+    {
+      "id": "P-N-001",
+      "condition": "NORMAL",
+      "text": "M8×30 규격, 8.8급, 무도금 육각볼트 개발 요청",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 8,
+          "length_mm": 30,
+          "strength_grade": "8.8",
+          "surface_treatment": "NONE"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_MCS_01",
+          "routing": [
+            "CUTTING",
+            "COLD_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R02",
+            "R04",
+            "R05",
+            "R08",
+            "R10",
+            "R11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P-N-002",
+      "condition": "NORMAL",
+      "text": "M10×50 규격의 8.8급 아연도금 육각볼트 검토 요청",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 10,
+          "length_mm": 50,
+          "strength_grade": "8.8",
+          "surface_treatment": "ZINC_PLATED"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_MCS_01",
+          "routing": [
+            "CUTTING",
+            "COLD_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "ZINC_PLATING",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R02",
+            "R04",
+            "R05",
+            "R08",
+            "R09",
+            "R10",
+            "R11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P-N-003",
+      "condition": "NORMAL",
+      "text": "M12×80, 강도등급 10.9, 무도금 육각볼트 개발 요청",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 12,
+          "length_mm": 80,
+          "strength_grade": "10.9",
+          "surface_treatment": "NONE"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_ALLOY_01",
+          "routing": [
+            "CUTTING",
+            "COLD_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R02",
+            "R04",
+            "R06",
+            "R08",
+            "R10",
+            "R11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P-N-004",
+      "condition": "NORMAL",
+      "text": "M16×60 규격, 10.9급, 아연도금 육각볼트 요청",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 16,
+          "length_mm": 60,
+          "strength_grade": "10.9",
+          "surface_treatment": "ZINC_PLATED"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_ALLOY_01",
+          "routing": [
+            "CUTTING",
+            "HOT_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "ZINC_PLATING",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R03",
+            "R04",
+            "R06",
+            "R08",
+            "R09",
+            "R10",
+            "R11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P-N-005",
+      "condition": "NORMAL",
+      "text": "M20×100 규격의 12.9급 무도금 육각볼트 개발 검토",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 20,
+          "length_mm": 100,
+          "strength_grade": "12.9",
+          "surface_treatment": "NONE"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_ALLOY_02",
+          "routing": [
+            "CUTTING",
+            "HOT_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R03",
+            "R04",
+            "R07",
+            "R08",
+            "R10",
+            "R11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P-N-006",
+      "condition": "NORMAL",
+      "text": "M8×120, 10.9급, 아연도금 육각볼트 개발 요청",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 8,
+          "length_mm": 120,
+          "strength_grade": "10.9",
+          "surface_treatment": "ZINC_PLATED"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_ALLOY_01",
+          "routing": [
+            "CUTTING",
+            "HOT_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "ZINC_PLATING",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R03",
+            "R04",
+            "R06",
+            "R08",
+            "R09",
+            "R10",
+            "R11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P-N-007",
+      "condition": "NORMAL",
+      "text": "M12×30 규격, 강도등급 12.9, 아연도금 육각볼트 요청",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 12,
+          "length_mm": 30,
+          "strength_grade": "12.9",
+          "surface_treatment": "ZINC_PLATED"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_ALLOY_02",
+          "routing": [
+            "CUTTING",
+            "COLD_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "ZINC_PLATING",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R02",
+            "R04",
+            "R07",
+            "R08",
+            "R09",
+            "R10",
+            "R11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P-N-008",
+      "condition": "NORMAL",
+      "text": "M16×80 규격의 8.8급 무도금 육각볼트 개발 요청",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 16,
+          "length_mm": 80,
+          "strength_grade": "8.8",
+          "surface_treatment": "NONE"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_MCS_01",
+          "routing": [
+            "CUTTING",
+            "HOT_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R03",
+            "R04",
+            "R05",
+            "R08",
+            "R10",
+            "R11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P-N-009",
+      "condition": "NORMAL",
+      "text": "M20×60, 10.9급, 아연도금 육각볼트 검토 요청",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 20,
+          "length_mm": 60,
+          "strength_grade": "10.9",
+          "surface_treatment": "ZINC_PLATED"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_ALLOY_01",
+          "routing": [
+            "CUTTING",
+            "HOT_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "ZINC_PLATING",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R03",
+            "R04",
+            "R06",
+            "R08",
+            "R09",
+            "R10",
+            "R11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P-N-010",
+      "condition": "NORMAL",
+      "text": "M10×100 규격, 12.9급, 무도금 육각볼트 개발 요청",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 10,
+          "length_mm": 100,
+          "strength_grade": "12.9",
+          "surface_treatment": "NONE"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_ALLOY_02",
+          "routing": [
+            "CUTTING",
+            "HOT_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R03",
+            "R04",
+            "R07",
+            "R08",
+            "R10",
+            "R11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P-V-001",
+      "condition": "VARIANT",
+      "text": "8파이 30, G8.8, 무도금 볼트",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 8,
+          "length_mm": 30,
+          "strength_grade": "8.8",
+          "surface_treatment": "NONE"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_MCS_01",
+          "routing": [
+            "CUTTING",
+            "COLD_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R02",
+            "R04",
+            "R05",
+            "R08",
+            "R10",
+            "R11"
+          ]
+        }
+      },
+      "variation_tags": [
+        "KOREAN_DIAMETER",
+        "GRADE_PREFIX"
+      ]
+    },
+    {
+      "id": "P-V-002",
+      "condition": "VARIANT",
+      "text": "볼트 10파이 L50 / 8.8 / Zn",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 10,
+          "length_mm": 50,
+          "strength_grade": "8.8",
+          "surface_treatment": "ZINC_PLATED"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_MCS_01",
+          "routing": [
+            "CUTTING",
+            "COLD_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "ZINC_PLATING",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R02",
+            "R04",
+            "R05",
+            "R08",
+            "R09",
+            "R10",
+            "R11"
+          ]
+        }
+      },
+      "variation_tags": [
+        "KOREAN_DIAMETER",
+        "LENGTH_PREFIX",
+        "SYMBOL_ZN"
+      ]
+    },
+    {
+      "id": "P-V-003",
+      "condition": "VARIANT",
+      "text": "M12*80 G10.9 no coating",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 12,
+          "length_mm": 80,
+          "strength_grade": "10.9",
+          "surface_treatment": "NONE"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_ALLOY_01",
+          "routing": [
+            "CUTTING",
+            "COLD_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R02",
+            "R04",
+            "R06",
+            "R08",
+            "R10",
+            "R11"
+          ]
+        }
+      },
+      "variation_tags": [
+        "ASTERISK_SIZE",
+        "GRADE_PREFIX",
+        "ENGLISH_SURFACE"
+      ]
+    },
+    {
+      "id": "P-V-004",
+      "condition": "VARIANT",
+      "text": "16Φ-60L / class10.9 / zinc",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 16,
+          "length_mm": 60,
+          "strength_grade": "10.9",
+          "surface_treatment": "ZINC_PLATED"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_ALLOY_01",
+          "routing": [
+            "CUTTING",
+            "HOT_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "ZINC_PLATING",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R03",
+            "R04",
+            "R06",
+            "R08",
+            "R09",
+            "R10",
+            "R11"
+          ]
+        }
+      },
+      "variation_tags": [
+        "PHI_SYMBOL",
+        "L_SUFFIX",
+        "ENGLISH_GRADE",
+        "ENGLISH_SURFACE"
+      ]
+    },
+    {
+      "id": "P-V-005",
+      "condition": "VARIANT",
+      "text": "20파이 100롱, 12.9, 무도금",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 20,
+          "length_mm": 100,
+          "strength_grade": "12.9",
+          "surface_treatment": "NONE"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_ALLOY_02",
+          "routing": [
+            "CUTTING",
+            "HOT_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R03",
+            "R04",
+            "R07",
+            "R08",
+            "R10",
+            "R11"
+          ]
+        }
+      },
+      "variation_tags": [
+        "KOREAN_DIAMETER",
+        "KOREAN_LENGTH_SLANG"
+      ]
+    },
+    {
+      "id": "P-V-006",
+      "condition": "VARIANT",
+      "text": "M8 L120, grade 10.9, Zn plated",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 8,
+          "length_mm": 120,
+          "strength_grade": "10.9",
+          "surface_treatment": "ZINC_PLATED"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_ALLOY_01",
+          "routing": [
+            "CUTTING",
+            "HOT_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "ZINC_PLATING",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R03",
+            "R04",
+            "R06",
+            "R08",
+            "R09",
+            "R10",
+            "R11"
+          ]
+        }
+      },
+      "variation_tags": [
+        "LENGTH_PREFIX",
+        "ENGLISH_GRADE",
+        "ENGLISH_SURFACE"
+      ]
+    },
+    {
+      "id": "P-V-007",
+      "condition": "VARIANT",
+      "text": "12Ø x 30 / G12.9 / zinc coat",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 12,
+          "length_mm": 30,
+          "strength_grade": "12.9",
+          "surface_treatment": "ZINC_PLATED"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_ALLOY_02",
+          "routing": [
+            "CUTTING",
+            "COLD_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "ZINC_PLATING",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R02",
+            "R04",
+            "R07",
+            "R08",
+            "R09",
+            "R10",
+            "R11"
+          ]
+        }
+      },
+      "variation_tags": [
+        "DIAMETER_SYMBOL",
+        "X_SEPARATOR",
+        "GRADE_PREFIX",
+        "ENGLISH_SURFACE"
+      ]
+    },
+    {
+      "id": "P-V-008",
+      "condition": "VARIANT",
+      "text": "M16-80 8.8급 표면처리X",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 16,
+          "length_mm": 80,
+          "strength_grade": "8.8",
+          "surface_treatment": "NONE"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_MCS_01",
+          "routing": [
+            "CUTTING",
+            "HOT_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R03",
+            "R04",
+            "R05",
+            "R08",
+            "R10",
+            "R11"
+          ]
+        }
+      },
+      "variation_tags": [
+        "HYPHEN_SIZE",
+        "NO_TREATMENT_SYMBOL"
+      ]
+    },
+    {
+      "id": "P-V-009",
+      "condition": "VARIANT",
+      "text": "20Ø80L / G10.9 / ZN",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 20,
+          "length_mm": 80,
+          "strength_grade": "10.9",
+          "surface_treatment": "ZINC_PLATED"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_ALLOY_01",
+          "routing": [
+            "CUTTING",
+            "HOT_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "ZINC_PLATING",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R03",
+            "R04",
+            "R06",
+            "R08",
+            "R09",
+            "R10",
+            "R11"
+          ]
+        }
+      },
+      "variation_tags": [
+        "DIAMETER_SYMBOL",
+        "L_SUFFIX",
+        "GRADE_PREFIX",
+        "SYMBOL_ZN"
+      ]
+    },
+    {
+      "id": "P-V-010",
+      "condition": "VARIANT",
+      "text": "10파이 길이100, 12.9class, coating none",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 10,
+          "length_mm": 100,
+          "strength_grade": "12.9",
+          "surface_treatment": "NONE"
+        },
+        "expected_output": {
+          "status": "OK",
+          "material": "MAT_ALLOY_02",
+          "routing": [
+            "CUTTING",
+            "HOT_FORMING",
+            "THREAD_ROLLING",
+            "HEAT_TREATMENT",
+            "INSPECTION",
+            "PACKAGING"
+          ],
+          "required_fields": [],
+          "applied_rules": [
+            "R01",
+            "R03",
+            "R04",
+            "R07",
+            "R08",
+            "R10",
+            "R11"
+          ]
+        }
+      },
+      "variation_tags": [
+        "KOREAN_DIAMETER",
+        "MIXED_GRADE",
+        "ENGLISH_SURFACE"
+      ]
+    },
+    {
+      "id": "P-M-001",
+      "condition": "MISSING",
+      "text": "M8×30, 8.8급 육각볼트 요청",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 8,
+          "length_mm": 30,
+          "strength_grade": "8.8",
+          "surface_treatment": null
+        },
+        "expected_output": {
+          "status": "CLARIFICATION_REQUIRED",
+          "material": null,
+          "routing": null,
+          "required_fields": [
+            "surface_treatment"
+          ],
+          "applied_rules": []
+        }
+      }
+    },
+    {
+      "id": "P-M-002",
+      "condition": "MISSING",
+      "text": "M10×50 아연도금 육각볼트 요청",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 10,
+          "length_mm": 50,
+          "strength_grade": null,
+          "surface_treatment": "ZINC_PLATED"
+        },
+        "expected_output": {
+          "status": "CLARIFICATION_REQUIRED",
+          "material": null,
+          "routing": null,
+          "required_fields": [
+            "strength_grade"
+          ],
+          "applied_rules": []
+        }
+      }
+    },
+    {
+      "id": "P-M-003",
+      "condition": "MISSING",
+      "text": "M12 규격, 10.9급, 무도금 육각볼트 요청",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 12,
+          "length_mm": null,
+          "strength_grade": "10.9",
+          "surface_treatment": "NONE"
+        },
+        "expected_output": {
+          "status": "CLARIFICATION_REQUIRED",
+          "material": null,
+          "routing": null,
+          "required_fields": [
+            "length_mm"
+          ],
+          "applied_rules": []
+        }
+      }
+    },
+    {
+      "id": "P-M-004",
+      "condition": "MISSING",
+      "text": "길이 60mm, 10.9급, 아연도금 육각볼트 요청",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": null,
+          "length_mm": 60,
+          "strength_grade": "10.9",
+          "surface_treatment": "ZINC_PLATED"
+        },
+        "expected_output": {
+          "status": "CLARIFICATION_REQUIRED",
+          "material": null,
+          "routing": null,
+          "required_fields": [
+            "diameter_mm"
+          ],
+          "applied_rules": []
+        }
+      }
+    },
+    {
+      "id": "P-M-005",
+      "condition": "MISSING",
+      "text": "M20×100 육각볼트 개발 요청",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 20,
+          "length_mm": 100,
+          "strength_grade": null,
+          "surface_treatment": null
+        },
+        "expected_output": {
+          "status": "CLARIFICATION_REQUIRED",
+          "material": null,
+          "routing": null,
+          "required_fields": [
+            "strength_grade",
+            "surface_treatment"
+          ],
+          "applied_rules": []
+        }
+      }
+    },
+    {
+      "id": "P-M-006",
+      "condition": "MISSING",
+      "text": "12.9급 아연도금 육각볼트 요청",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": null,
+          "length_mm": null,
+          "strength_grade": "12.9",
+          "surface_treatment": "ZINC_PLATED"
+        },
+        "expected_output": {
+          "status": "CLARIFICATION_REQUIRED",
+          "material": null,
+          "routing": null,
+          "required_fields": [
+            "diameter_mm",
+            "length_mm"
+          ],
+          "applied_rules": []
+        }
+      }
+    },
+    {
+      "id": "P-M-007",
+      "condition": "MISSING",
+      "text": "M8×120 무도금 볼트",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 8,
+          "length_mm": 120,
+          "strength_grade": null,
+          "surface_treatment": "NONE"
+        },
+        "expected_output": {
+          "status": "CLARIFICATION_REQUIRED",
+          "material": null,
+          "routing": null,
+          "required_fields": [
+            "strength_grade"
+          ],
+          "applied_rules": []
+        }
+      }
+    },
+    {
+      "id": "P-M-008",
+      "condition": "MISSING",
+      "text": "16파이, G8.8, Zn 볼트",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 16,
+          "length_mm": null,
+          "strength_grade": "8.8",
+          "surface_treatment": "ZINC_PLATED"
+        },
+        "expected_output": {
+          "status": "CLARIFICATION_REQUIRED",
+          "material": null,
+          "routing": null,
+          "required_fields": [
+            "length_mm"
+          ],
+          "applied_rules": []
+        }
+      },
+      "variation_tags": [
+        "KOREAN_DIAMETER",
+        "GRADE_PREFIX",
+        "SYMBOL_ZN"
+      ]
+    },
+    {
+      "id": "P-M-009",
+      "condition": "MISSING",
+      "text": "L80 / 10.9 / 무도금 육각볼트",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": null,
+          "length_mm": 80,
+          "strength_grade": "10.9",
+          "surface_treatment": "NONE"
+        },
+        "expected_output": {
+          "status": "CLARIFICATION_REQUIRED",
+          "material": null,
+          "routing": null,
+          "required_fields": [
+            "diameter_mm"
+          ],
+          "applied_rules": []
+        }
+      },
+      "variation_tags": [
+        "LENGTH_PREFIX"
+      ]
+    },
+    {
+      "id": "P-M-010",
+      "condition": "MISSING",
+      "text": "M20×60 12.9급 볼트",
+      "ground_truth": {
+        "attributes": {
+          "diameter_mm": 20,
+          "length_mm": 60,
+          "strength_grade": "12.9",
+          "surface_treatment": null
+        },
+        "expected_output": {
+          "status": "CLARIFICATION_REQUIRED",
+          "material": null,
+          "routing": null,
+          "required_fields": [
+            "surface_treatment"
+          ],
+          "applied_rules": []
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+results/*
+!results/.gitkeep
+
+data/validation/*
+!data/validation/.gitkeep
+
+data/test/*
+!data/test/.gitkeep
+
+.env
+.DS_Store

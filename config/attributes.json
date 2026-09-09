@@ -1,0 +1,94 @@
+{
+  "version": "0.1",
+  "product_scope": {
+    "product_type": "HEX_BOLT",
+    "description_ko": "육각 볼트 단일 제품군"
+  },
+  "attributes": {
+    "diameter_mm": {
+      "type": "integer",
+      "required": true,
+      "values": [
+        8,
+        10,
+        12,
+        16,
+        20
+      ],
+      "examples": [
+        "M20",
+        "20파이",
+        "직경 20"
+      ],
+      "role": "성형 방식 결정"
+    },
+    "length_mm": {
+      "type": "integer",
+      "required": true,
+      "values": [
+        30,
+        50,
+        60,
+        80,
+        100,
+        120
+      ],
+      "examples": [
+        "80mm",
+        "L80",
+        "M20x80의 80"
+      ],
+      "role": "성형 방식 결정"
+    },
+    "strength_grade": {
+      "type": "string",
+      "required": true,
+      "values": [
+        "8.8",
+        "10.9",
+        "12.9"
+      ],
+      "examples": [
+        "10.9급",
+        "G10.9",
+        "class 10.9"
+      ],
+      "role": "Material 및 열처리 결정"
+    },
+    "surface_treatment": {
+      "type": "string",
+      "required": true,
+      "values": [
+        "NONE",
+        "ZINC_PLATED"
+      ],
+      "examples": [
+        "무도금",
+        "아연도금",
+        "Zn"
+      ],
+      "role": "표면처리 공정 결정"
+    }
+  },
+  "output_domains": {
+    "materials": [
+      "MAT_MCS_01",
+      "MAT_ALLOY_01",
+      "MAT_ALLOY_02"
+    ],
+    "operations": [
+      "CUTTING",
+      "COLD_FORMING",
+      "HOT_FORMING",
+      "THREAD_ROLLING",
+      "HEAT_TREATMENT",
+      "ZINC_PLATING",
+      "INSPECTION",
+      "PACKAGING"
+    ]
+  },
+  "dataset": {
+    "full_combination_count": 180,
+    "calculation": "5 x 6 x 3 x 2"
+  }
+}

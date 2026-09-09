@@ -1,0 +1,220 @@
+{
+  "version": "0.1",
+  "notes": [
+    "정확한 산업 공정 경계값을 주장하기 위한 파일이 아니라 합성 ERP 실험환경의 결정 규칙이다.",
+    "공개 근거가 필요한 규칙은 논문 작성 단계에서 별도 출처 검증 후 근거 문서에 기록한다."
+  ],
+  "routing_order": [
+    "CUTTING",
+    "COLD_FORMING",
+    "HOT_FORMING",
+    "THREAD_ROLLING",
+    "HEAT_TREATMENT",
+    "ZINC_PLATING",
+    "INSPECTION",
+    "PACKAGING"
+  ],
+  "rules": [
+    {
+      "id": "R01",
+      "name": "BASE_CUTTING",
+      "rule_type": "SYNTHETIC_CONVENTION",
+      "condition": {
+        "always": true
+      },
+      "actions": [
+        {
+          "type": "ADD_OPERATION",
+          "value": "CUTTING"
+        }
+      ],
+      "description_ko": "모든 연구용 볼트 Routing에 절단 공정을 포함"
+    },
+    {
+      "id": "R02",
+      "name": "COLD_FORMING_SMALL",
+      "rule_type": "SYNTHETIC_CONVENTION",
+      "condition": {
+        "all": [
+          {
+            "field": "diameter_mm",
+            "op": "<=",
+            "value": 12
+          },
+          {
+            "field": "length_mm",
+            "op": "<=",
+            "value": 80
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "ADD_OPERATION",
+          "value": "COLD_FORMING"
+        }
+      ],
+      "description_ko": "직경 12 mm 이하이면서 길이 80 mm 이하인 조합은 냉간성형"
+    },
+    {
+      "id": "R03",
+      "name": "HOT_FORMING_LARGE_OR_LONG",
+      "rule_type": "SYNTHETIC_CONVENTION",
+      "condition": {
+        "any": [
+          {
+            "field": "diameter_mm",
+            "op": ">=",
+            "value": 16
+          },
+          {
+            "field": "length_mm",
+            "op": ">=",
+            "value": 100
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "ADD_OPERATION",
+          "value": "HOT_FORMING"
+        }
+      ],
+      "description_ko": "직경 16 mm 이상 또는 길이 100 mm 이상인 조합은 열간성형"
+    },
+    {
+      "id": "R04",
+      "name": "BASE_THREAD_ROLLING",
+      "rule_type": "SYNTHETIC_CONVENTION",
+      "condition": {
+        "always": true
+      },
+      "actions": [
+        {
+          "type": "ADD_OPERATION",
+          "value": "THREAD_ROLLING"
+        }
+      ],
+      "description_ko": "연구 대상 볼트에는 나사 전조 공정을 포함"
+    },
+    {
+      "id": "R05",
+      "name": "MATERIAL_GRADE_8_8",
+      "rule_type": "PUBLIC_BASIS_TO_VERIFY",
+      "condition": {
+        "field": "strength_grade",
+        "op": "==",
+        "value": "8.8"
+      },
+      "actions": [
+        {
+          "type": "SET_MATERIAL",
+          "value": "MAT_MCS_01"
+        }
+      ],
+      "description_ko": "8.8급을 연구용 중탄소강 계열 Material 코드에 매핑"
+    },
+    {
+      "id": "R06",
+      "name": "MATERIAL_GRADE_10_9",
+      "rule_type": "PUBLIC_BASIS_TO_VERIFY",
+      "condition": {
+        "field": "strength_grade",
+        "op": "==",
+        "value": "10.9"
+      },
+      "actions": [
+        {
+          "type": "SET_MATERIAL",
+          "value": "MAT_ALLOY_01"
+        }
+      ],
+      "description_ko": "10.9급을 연구용 합금강 계열 Material 코드에 매핑"
+    },
+    {
+      "id": "R07",
+      "name": "MATERIAL_GRADE_12_9",
+      "rule_type": "PUBLIC_BASIS_TO_VERIFY",
+      "condition": {
+        "field": "strength_grade",
+        "op": "==",
+        "value": "12.9"
+      },
+      "actions": [
+        {
+          "type": "SET_MATERIAL",
+          "value": "MAT_ALLOY_02"
+        }
+      ],
+      "description_ko": "12.9급을 연구용 합금강 계열 Material 코드에 매핑"
+    },
+    {
+      "id": "R08",
+      "name": "HEAT_TREATMENT_STRENGTH",
+      "rule_type": "PUBLIC_BASIS_TO_VERIFY",
+      "condition": {
+        "field": "strength_grade",
+        "op": "in",
+        "value": [
+          "8.8",
+          "10.9",
+          "12.9"
+        ]
+      },
+      "actions": [
+        {
+          "type": "ADD_OPERATION",
+          "value": "HEAT_TREATMENT"
+        }
+      ],
+      "description_ko": "연구 대상 강도등급에는 열처리 공정을 포함"
+    },
+    {
+      "id": "R09",
+      "name": "ZINC_PLATING",
+      "rule_type": "PUBLIC_BASIS_TO_VERIFY",
+      "condition": {
+        "field": "surface_treatment",
+        "op": "==",
+        "value": "ZINC_PLATED"
+      },
+      "actions": [
+        {
+          "type": "ADD_OPERATION",
+          "value": "ZINC_PLATING"
+        }
+      ],
+      "description_ko": "아연도금 요구 시 아연도금 공정을 포함"
+    },
+    {
+      "id": "R10",
+      "name": "BASE_INSPECTION",
+      "rule_type": "SYNTHETIC_CONVENTION",
+      "condition": {
+        "always": true
+      },
+      "actions": [
+        {
+          "type": "ADD_OPERATION",
+          "value": "INSPECTION"
+        }
+      ],
+      "description_ko": "최종 검사 공정을 포함"
+    },
+    {
+      "id": "R11",
+      "name": "BASE_PACKAGING",
+      "rule_type": "SYNTHETIC_CONVENTION",
+      "condition": {
+        "always": true
+      },
+      "actions": [
+        {
+          "type": "ADD_OPERATION",
+          "value": "PACKAGING"
+        }
+      ],
+      "description_ko": "최종 포장 공정을 포함"
+    }
+  ]
+}

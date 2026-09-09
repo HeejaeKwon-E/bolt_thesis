@@ -40,10 +40,14 @@ bolt_thesis/
 │   ├── check_cuda.py
 │   ├── check_vllm_server.py
 │   ├── generate_pilot_dataset.py
+│   ├── generate_validation_dataset.py
 │   ├── run_system_a_pilot.py
+│   ├── run_system_a_validation.py
 │   ├── run_vllm_server.sh
 │   ├── summarize_system_a_pilot.py
+│   ├── summarize_system_a_validation.py
 │   ├── validate_pilot.py
+│   ├── validate_validation.py
 │   └── validate_rules.py
 │
 ├── src/
@@ -83,6 +87,18 @@ vLLM 실행 방법은 [`docs/RUN_VLLM.md`](docs/RUN_VLLM.md)를 참고합니다.
 
 1. 시스템 A Pilot 30건 실행
 2. Pilot 결과를 기준으로 프롬프트 수정
-3. Validation 약 50건 작성
+3. Validation 50건 실행
 4. 시스템 B 구현
 5. 시스템 C 구현
+
+
+## v0.7 Validation
+
+Validation 50건과 실행 스크립트를 추가했습니다.
+
+```bash
+uv run python scripts/validate_validation.py
+uv run python scripts/run_system_a_validation.py --limit 5
+```
+
+자세한 내용은 `docs/VALIDATION_DATASET.md`를 참고합니다.

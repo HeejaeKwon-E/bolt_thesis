@@ -20,9 +20,7 @@ def main() -> None:
         actual = engine.run(attrs)
 
         if actual != expected:
-            failures.append(
-                {"id": item["id"], "expected": expected, "actual": actual}
-            )
+            failures.append({"id": item["id"], "expected": expected, "actual": actual})
 
     ids = [item["id"] for item in dataset["items"]]
     counts = Counter(item["condition"] for item in dataset["items"])

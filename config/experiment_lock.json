@@ -1,0 +1,35 @@
+{
+  "version": "0.2",
+  "current_experiment": {
+    "status": "UNFROZEN_AFTER_MODEL_CHANGE",
+    "model": "Qwen/Qwen3.5-4B",
+    "backend": "vllm",
+    "temperature": 0.0,
+    "seed": 42,
+    "structured_output": true,
+    "prompt_file": "config/extractor_prompt.json",
+    "prompt_version": "0.1",
+    "prompt_sha256": "34468e7ef9405d842dc37cf19b1e5931e33f5c8c9155f8dcdc5976e3e98a4323",
+    "note": "Final Test 이전 모델 교체로 인해 A/B Validation을 새 모델로 다시 수행한 뒤 동결한다."
+  },
+  "previous_development_baseline": {
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "status": "FROZEN",
+    "validation_result": {
+      "total": 50,
+      "correct": 49,
+      "accuracy": 0.98,
+      "known_failure": {
+        "id": "V-V-018",
+        "type": "ATTRIBUTE_CROSS_CONFUSION",
+        "description": "G10.9의 숫자 10을 diameter_mm=10으로 오인; 정답은 20파이 -> 20"
+      }
+    },
+    "note": "Qwen2.5-7B-Instruct 기반 개발/Validation 참고 결과이며 Qwen3.5-4B 본 실험 결과와 혼합하지 않는다."
+  },
+  "freeze_policy": [
+    "Qwen3.5-4B로 System A/B Validation을 다시 실행한다.",
+    "System C까지 Validation을 완료한 뒤 A/B/C 설정을 동결한다.",
+    "Final Test를 확인한 뒤에는 Prompt/Rule/Regex/Model을 수정하지 않는다."
+  ]
+}

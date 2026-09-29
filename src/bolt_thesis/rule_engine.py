@@ -25,9 +25,15 @@ class RuleEngine:
             rules=self._load_json(rules_path),
         )
 
-        self.attribute_defs: dict[str, dict[str, Any]] = self.config.attributes["attributes"]
-        self.material_domain = set(self.config.attributes["output_domains"]["materials"])
-        self.operation_domain = set(self.config.attributes["output_domains"]["operations"])
+        self.attribute_defs: dict[str, dict[str, Any]] = self.config.attributes[
+            "attributes"
+        ]
+        self.material_domain = set(
+            self.config.attributes["output_domains"]["materials"]
+        )
+        self.operation_domain = set(
+            self.config.attributes["output_domains"]["operations"]
+        )
         self.routing_order: list[str] = self.config.rules["routing_order"]
         self.routing_rank = {
             operation: index for index, operation in enumerate(self.routing_order)

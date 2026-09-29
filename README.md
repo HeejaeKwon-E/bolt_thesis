@@ -102,3 +102,24 @@ uv run python scripts/run_system_a_validation.py --limit 5
 ```
 
 자세한 내용은 `docs/VALIDATION_DATASET.md`를 참고합니다.
+
+
+## v0.8 System B 추가
+
+System B(LLM 직접 최종 생성)를 추가했습니다.
+
+```bash
+uv run python scripts/run_system_b.py --split pilot --limit 3
+uv run python scripts/run_system_b.py --split pilot
+uv run python scripts/summarize_system_b.py --split pilot
+```
+
+Pilot 확인 후:
+
+```bash
+uv run python scripts/run_system_b.py --split validation --limit 5
+uv run python scripts/run_system_b.py --split validation
+uv run python scripts/summarize_system_b.py --split validation
+```
+
+자세한 설명: `docs/SYSTEM_B.md`

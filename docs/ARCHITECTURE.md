@@ -50,3 +50,20 @@ Evaluation
 ### scripts
 
 실험자가 터미널에서 직접 실행할 파일만 둡니다.
+
+
+## 시스템 B 흐름
+
+```text
+자연어 개발의뢰
+    +
+System A와 동일한 정규화 지침
+    +
+rules.json의 동일 제조 규칙
+        ↓
+      vLLM
+        ↓
+Material / Routing 또는 Clarification
+        ↓
+System B Evaluation
+```

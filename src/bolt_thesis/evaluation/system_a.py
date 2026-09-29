@@ -4,8 +4,8 @@ from collections import Counter
 from typing import Any
 
 from bolt_thesis.extractor.validator import (
-    ExtractionValidationError,
     FIELDS,
+    ExtractionValidationError,
     validate_extraction,
 )
 from bolt_thesis.pipelines.system_a import SystemAPipeline

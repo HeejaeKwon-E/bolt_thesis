@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 CONFIG_DIR = PROJECT_ROOT / "config"
@@ -20,5 +19,18 @@ SYSTEM_A_RUN_TEMPLATE_PATH = DATA_DIR / "pilot" / "system_a_run_template.json"
 DEFAULT_SYSTEM_A_RESULT_PATH = RESULTS_DIR / "system_a_pilot.json"
 
 VALIDATION_DATASET_PATH = DATA_DIR / "validation" / "validation_dataset.json"
-VALIDATION_SYSTEM_A_RUN_TEMPLATE_PATH = DATA_DIR / "validation" / "system_a_run_template.json"
+VALIDATION_SYSTEM_A_RUN_TEMPLATE_PATH = (
+    DATA_DIR / "validation" / "system_a_run_template.json"
+)
 DEFAULT_SYSTEM_A_VALIDATION_RESULT_PATH = RESULTS_DIR / "system_a_validation.json"
+
+SYSTEM_B_PROMPT_PATH = CONFIG_DIR / "system_b_prompt.json"
+SYSTEM_B_SCHEMA_PATH = CONFIG_DIR / "system_b_schema.json"
+
+SYSTEM_B_PILOT_TEMPLATE_PATH = DATA_DIR / "pilot" / "system_b_run_template.json"
+SYSTEM_B_VALIDATION_TEMPLATE_PATH = (
+    DATA_DIR / "validation" / "system_b_run_template.json"
+)
+
+DEFAULT_SYSTEM_B_PILOT_RESULT_PATH = RESULTS_DIR / "system_b_pilot.json"
+DEFAULT_SYSTEM_B_VALIDATION_RESULT_PATH = RESULTS_DIR / "system_b_validation.json"

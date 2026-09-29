@@ -6,7 +6,6 @@ from typing import Any
 
 from bolt_thesis.paths import ATTRIBUTES_PATH
 
-
 FIELDS = (
     "diameter_mm",
     "length_mm",

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "system_b_output.schema.json",
+  "title": "System B Direct Manufacturing Output",
+  "description": "자연어 개발의뢰에서 제조 규칙을 직접 적용해 최종 Material/Routing 또는 필수정보 추가확인 결과를 반환한다.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "material",
+    "routing",
+    "required_fields"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "OK",
+        "CLARIFICATION_REQUIRED"
+      ]
+    },
+    "material": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "MAT_MCS_01",
+        "MAT_ALLOY_01",
+        "MAT_ALLOY_02",
+        null
+      ]
+    },
+    "routing": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "CUTTING",
+          "COLD_FORMING",
+          "HOT_FORMING",
+          "THREAD_ROLLING",
+          "HEAT_TREATMENT",
+          "ZINC_PLATING",
+          "INSPECTION",
+          "PACKAGING"
+        ]
+      }
+    },
+    "required_fields": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "diameter_mm",
+          "length_mm",
+          "strength_grade",
+          "surface_treatment"
+        ]
+      }
+    }
+  }
+}

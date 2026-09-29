@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-MODEL_ID="${MODEL_ID:-Qwen/Qwen2.5-7B-Instruct}"
+MODEL_ID="${MODEL_ID:-Qwen/Qwen3.5-4B}"
 HOST="${VLLM_HOST:-127.0.0.1}"
 PORT="${VLLM_PORT:-8000}"
 GPU_MEMORY_UTILIZATION="${GPU_MEMORY_UTILIZATION:-0.90}"

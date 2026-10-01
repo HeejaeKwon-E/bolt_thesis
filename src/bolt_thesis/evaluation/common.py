@@ -11,7 +11,7 @@ from bolt_thesis.extractor.validator import (
 )
 from bolt_thesis.rule_engine import RuleEngine
 
-SystemName = Literal["A", "B"]
+SystemName = Literal["A", "B", "C"]
 
 
 def _routing_prf(pred: list[str], gold: list[str]) -> tuple[float, float, float]:
@@ -150,7 +150,7 @@ def evaluate_run_common(run_data: dict[str, Any], system: SystemName) -> dict[st
         row = by_condition[condition]
         row["total"] += 1
 
-        raw = item.get("model_output_raw")
+        raw = item.get("system_output_raw") or item.get("model_output_raw")
         if raw is None:
             item["common_evaluation"] = {
                 "evaluated": False,
@@ -172,7 +172,7 @@ def evaluate_run_common(run_data: dict[str, Any], system: SystemName) -> dict[st
         semantic_errors: list[str] = []
         attribute_exact: bool | None = None
 
-        if system == "A":
+        if system in {"A", "C"}:
             try:
                 parsed = validate_extraction(raw)
                 structural_valid = True
@@ -341,7 +341,7 @@ def evaluate_run_common(run_data: dict[str, Any], system: SystemName) -> dict[st
         "dangerous_guess_rate_on_missing": rate(totals["dangerous_guess"], missing),
     }
 
-    if system == "A":
+    if system in {"A", "C"}:
         summary["attribute_exact_count"] = totals["attribute_exact"]
         summary["attribute_exact_rate"] = rate(totals["attribute_exact"], evaluated)
         summary["field_accuracy"] = {

@@ -11,10 +11,13 @@ echo "[vLLM] model=${MODEL_ID}"
 echo "[vLLM] ${HOST}:${PORT}"
 echo "[vLLM] CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-<not set>}"
 
+SEED="${VLLM_SEED:-42}"
+
 exec vllm serve "${MODEL_ID}" \
   --host "${HOST}" \
   --port "${PORT}" \
   --dtype auto \
   --max-model-len "${MAX_MODEL_LEN}" \
   --gpu-memory-utilization "${GPU_MEMORY_UTILIZATION}" \
+  --seed "${SEED}" \
   --generation-config vllm

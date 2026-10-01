@@ -123,3 +123,28 @@ uv run python scripts/summarize_system_b.py --split validation
 ```
 
 자세한 설명: `docs/SYSTEM_B.md`
+
+## v0.10 — Unified Evaluation
+
+A/B 공통 최종 업무 평가기를 추가했습니다.
+
+```bash
+uv run python scripts/reevaluate_results.py --split validation
+```
+
+자세한 정의는 `docs/EVALUATION_V2.md`를 참고하세요.
+
+
+## v0.11 System C 추가
+
+Regex/Dictionary + 동일 Rule Engine 기반 System C를 추가했습니다.
+
+```bash
+uv run python scripts/run_system_c.py --split pilot
+uv run python scripts/run_system_c.py --split validation
+
+uv run python scripts/reevaluate_results.py --split pilot
+uv run python scripts/reevaluate_results.py --split validation
+```
+
+설명: `docs/SYSTEM_C.md`

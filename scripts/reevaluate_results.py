@@ -10,22 +10,27 @@ from bolt_thesis.paths import (
     DEFAULT_SYSTEM_A_VALIDATION_RESULT_PATH,
     DEFAULT_SYSTEM_B_PILOT_RESULT_PATH,
     DEFAULT_SYSTEM_B_VALIDATION_RESULT_PATH,
+    DEFAULT_SYSTEM_C_PILOT_RESULT_PATH,
+    DEFAULT_SYSTEM_C_VALIDATION_RESULT_PATH,
     PILOT_DATASET_PATH,
     RESULTS_DIR,
     VALIDATION_DATASET_PATH,
 )
 
 
-def _paths(split: str) -> tuple[Path, Path, Path]:
+def _paths(split: str) -> tuple[Path, Path, Path, Path]:
     if split == "pilot":
         return (
             DEFAULT_SYSTEM_A_RESULT_PATH,
             DEFAULT_SYSTEM_B_PILOT_RESULT_PATH,
+            DEFAULT_SYSTEM_C_PILOT_RESULT_PATH,
             RESULTS_DIR / "unified_evaluation_pilot.json",
         )
+
     return (
         DEFAULT_SYSTEM_A_VALIDATION_RESULT_PATH,
         DEFAULT_SYSTEM_B_VALIDATION_RESULT_PATH,
+        DEFAULT_SYSTEM_C_VALIDATION_RESULT_PATH,
         RESULTS_DIR / "unified_evaluation_validation.json",
     )
 
@@ -73,10 +78,10 @@ def main() -> None:
     parser.add_argument("--output", default=None)
     args = parser.parse_args()
 
-    a_path, b_path, default_output = _paths(args.split)
+    a_path, b_path, c_path, default_output = _paths(args.split)
     output = Path(args.output) if args.output else default_output
 
-    missing = [str(path) for path in (a_path, b_path) if not path.exists()]
+    missing = [str(path) for path in (a_path, b_path, c_path) if not path.exists()]
     if missing:
         raise FileNotFoundError("Missing result file(s): " + ", ".join(missing))
 
@@ -88,19 +93,26 @@ def main() -> None:
         json.loads(b_path.read_text(encoding="utf-8")),
         args.split,
     )
+    c_run = _attach_conditions(
+        json.loads(c_path.read_text(encoding="utf-8")),
+        args.split,
+    )
 
     a = evaluate_run_common(a_run, "A")
     b = evaluate_run_common(b_run, "B")
+    c = evaluate_run_common(c_run, "C")
 
     report = {
         "split": args.split,
         "systems": {
             "A": a["common_summary"],
             "B": b["common_summary"],
+            "C": c["common_summary"],
         },
         "by_condition": {
             "A": a["common_summary_by_condition"],
             "B": b["common_summary_by_condition"],
+            "C": c["common_summary_by_condition"],
         },
     }
     output.write_text(
@@ -124,7 +136,7 @@ def main() -> None:
 
     print("\ncondition,system,total,task_success,accuracy")
     for condition in ("NORMAL", "VARIANT", "MISSING"):
-        for system in ("A", "B"):
+        for system in ("A", "B", "C"):
             row = report["by_condition"][system][condition]
             print(
                 f"{condition},{system},{row['evaluated']},"

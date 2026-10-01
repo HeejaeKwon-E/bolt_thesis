@@ -9,12 +9,14 @@ from bolt_thesis.paths import (
     DEFAULT_SYSTEM_A_VALIDATION_RESULT_PATH,
     DEFAULT_SYSTEM_B_PILOT_RESULT_PATH,
     DEFAULT_SYSTEM_B_VALIDATION_RESULT_PATH,
+    DEFAULT_SYSTEM_C_PILOT_RESULT_PATH,
+    DEFAULT_SYSTEM_C_VALIDATION_RESULT_PATH,
 )
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--system", choices=["A", "B"], required=True)
+    parser.add_argument("--system", choices=["A", "B", "C"], required=True)
     parser.add_argument(
         "--split", choices=["pilot", "validation"], default="validation"
     )
@@ -26,11 +28,17 @@ def main() -> None:
             if args.split == "pilot"
             else DEFAULT_SYSTEM_A_VALIDATION_RESULT_PATH
         )
-    else:
+    elif args.system == "B":
         path = (
             DEFAULT_SYSTEM_B_PILOT_RESULT_PATH
             if args.split == "pilot"
             else DEFAULT_SYSTEM_B_VALIDATION_RESULT_PATH
+        )
+    else:
+        path = (
+            DEFAULT_SYSTEM_C_PILOT_RESULT_PATH
+            if args.split == "pilot"
+            else DEFAULT_SYSTEM_C_VALIDATION_RESULT_PATH
         )
 
     data = evaluate_run_common(

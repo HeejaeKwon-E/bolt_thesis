@@ -2,7 +2,7 @@
 name = "bolt-thesis"
 version = "0.6.0"
 description = "LLM + rule-engine master's thesis experiment for bolt manufacturing master data"
-requires-python = ">=3.13"
+requires-python = ">=3.13,<3.15"
 dependencies = [
   "openai>=1.0.0",
   "vllm>=0.12.0",

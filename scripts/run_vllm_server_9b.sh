@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+
+MODEL_ID="${MODEL_ID:-Qwen/Qwen3.5-9B}"
+HOST="${VLLM_HOST:-127.0.0.1}"
+PORT="${VLLM_PORT:-8000}"
+GPU_MEMORY_UTILIZATION="${GPU_MEMORY_UTILIZATION:-0.90}"
+MAX_MODEL_LEN="${MAX_MODEL_LEN:-4096}"
+SEED="${VLLM_SEED:-42}"
+
+echo "[vLLM] model=${MODEL_ID}"
+echo "[vLLM] ${HOST}:${PORT}"
+echo "[vLLM] CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-<not set>}"
+echo "[vLLM] seed=${SEED}"
+
+exec vllm serve "${MODEL_ID}" \
+  --host "${HOST}" \
+  --port "${PORT}" \
+  --dtype auto \
+  --max-model-len "${MAX_MODEL_LEN}" \
+  --gpu-memory-utilization "${GPU_MEMORY_UTILIZATION}" \
+  --seed "${SEED}" \
+  --generation-config vllm \
+  --enforce-eager

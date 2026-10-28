@@ -1,0 +1,35 @@
+{
+  "experiment_version": "0.5-model-scale-9b",
+  "system": "A_OR_B",
+  "task": "POST_HOC_MODEL_SCALE_SENSITIVITY",
+  "model": {
+    "model_id": "Qwen/Qwen3.5-9B"
+  },
+  "vllm_server": {
+    "host": "127.0.0.1",
+    "port": 8000,
+    "base_url": "http://127.0.0.1:8000/v1",
+    "api_key": "EMPTY",
+    "dtype": "auto",
+    "max_model_len": 4096,
+    "gpu_memory_utilization": 0.9,
+    "generation_config": "vllm",
+    "seed": 42
+  },
+  "generation": {
+    "temperature": 0.0,
+    "seed": 42,
+    "max_tokens": 128,
+    "structured_output": true
+  },
+  "analysis_role": "post-hoc model-scale sensitivity analysis",
+  "comparison_baseline": "Qwen/Qwen3.5-4B",
+  "frozen_policy": [
+    "Final Test dataset is reused unchanged.",
+    "System A/B prompts, schemas, rules, and evaluation logic are reused unchanged.",
+    "Temperature, request seed, server seed, max model length, and structured-output settings remain unchanged.",
+    "Only the served model ID changes from Qwen/Qwen3.5-4B to Qwen/Qwen3.5-9B.",
+    "The 9B analysis is post-hoc and must not be presented as part of the preregistered 4B primary experiment.",
+    "VLLM_BATCH_INVARIANT is not used because Qwen3.5 GDN attention is unsupported by that vLLM mode."
+  ]
+}

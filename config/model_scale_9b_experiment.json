@@ -1,0 +1,22 @@
+{
+  "version": "0.1",
+  "status": "READY_NOT_RUN",
+  "analysis_type": "POST_HOC_MODEL_SCALE_SENSITIVITY",
+  "baseline_model": "Qwen/Qwen3.5-4B",
+  "comparison_model": "Qwen/Qwen3.5-9B",
+  "systems_to_run": ["A", "B"],
+  "system_c_policy": "NOT_RERUN_BECAUSE_MODEL_INDEPENDENT",
+  "dataset": "data/final_test/final_test_dataset.json",
+  "dataset_sha256": "dbe1470a676623a8cc48706a1aa1dbf15aff1c3cc509ee234bf8400989f4bf06",
+  "results_dir": "results/model_scale/qwen3_5_9b",
+  "comparison_outputs": [
+    "results/model_scale/qwen3_5_4b_vs_9b.json",
+    "results/model_scale/qwen3_5_4b_vs_9b.md"
+  ],
+  "policy": [
+    "Do not modify the completed 4B canonical results.",
+    "Do not modify prompts, rules, schemas, dataset, or evaluator based on 9B outcomes.",
+    "Use one completed canonical 9B run per system; resume only after infrastructure interruption.",
+    "Report this analysis as post-hoc/exploratory model-scale sensitivity analysis."
+  ]
+}

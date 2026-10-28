@@ -6,12 +6,12 @@ HOST="${VLLM_HOST:-127.0.0.1}"
 PORT="${VLLM_PORT:-8000}"
 GPU_MEMORY_UTILIZATION="${GPU_MEMORY_UTILIZATION:-0.90}"
 MAX_MODEL_LEN="${MAX_MODEL_LEN:-4096}"
+SEED="${VLLM_SEED:-42}"
 
 echo "[vLLM] model=${MODEL_ID}"
 echo "[vLLM] ${HOST}:${PORT}"
 echo "[vLLM] CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-<not set>}"
-
-SEED="${VLLM_SEED:-42}"
+echo "[vLLM] seed=${SEED}"
 
 exec vllm serve "${MODEL_ID}" \
   --host "${HOST}" \

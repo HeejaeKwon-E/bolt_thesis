@@ -1,16 +1,112 @@
 {
-  "version": "0.2",
+  "version": "1.2",
   "current_experiment": {
-    "status": "UNFROZEN_AFTER_MODEL_CHANGE",
+    "status": "COMPLETED_4B_FINAL_TEST",
+    "frozen_date": "2026-10-12",
     "model": "Qwen/Qwen3.5-4B",
     "backend": "vllm",
+    "vllm_version": "0.30.0",
+    "dtype": "bfloat16",
+    "max_model_len": 4096,
+    "gpu_memory_utilization": 0.9,
+    "generation_config": "vllm",
     "temperature": 0.0,
-    "seed": 42,
+    "request_seed": 42,
+    "server_seed": 42,
     "structured_output": true,
-    "prompt_file": "config/extractor_prompt.json",
-    "prompt_version": "0.1",
-    "prompt_sha256": "34468e7ef9405d842dc37cf19b1e5931e33f5c8c9155f8dcdc5976e3e98a4323",
-    "note": "Final Test 이전 모델 교체로 인해 A/B Validation을 새 모델로 다시 수행한 뒤 동결한다."
+    "batch_invariant": false,
+    "batch_invariant_note": "Qwen3.5 GDN_ATTN is not supported by VLLM_BATCH_INVARIANT in the frozen vLLM 0.30.0 environment.",
+    "integration_note": "Final Test v0.12 was integrated onto bolt_thesis_1012 before any Final Test execution. Compared with the earlier freeze snapshot, rule_engine.py and system_b/prompt.py had formatting-only differences; behavioral validators/tests were re-run and the frozen hashes below were regenerated from the current source bytes.",
+    "completed_date": "2026-10-22"
+  },
+  "systems": {
+    "A": {
+      "description": "Qwen3.5-4B attribute extraction -> required/null check -> deterministic RuleEngine",
+      "prompt_file": "config/extractor_prompt.json",
+      "prompt_version": "0.1",
+      "prompt_sha256": "34468e7ef9405d842dc37cf19b1e5931e33f5c8c9155f8dcdc5976e3e98a4323"
+    },
+    "B": {
+      "description": "Qwen3.5-4B direct final Material/Routing or clarification using the same manufacturing rules",
+      "prompt_file": "config/system_b_prompt.json",
+      "prompt_sha256": "fadf4be7e11be2eb4710d6071e58ef2cbc8482fe38c6f1fbb6ec621ff4289f1c"
+    },
+    "C": {
+      "description": "Regex/Dictionary extraction -> required/null check -> same deterministic RuleEngine",
+      "config_file": "config/system_c.json",
+      "config_sha256": "5457bc0a96641ce331e57b9c6039493dac18d9f84bb2770fd86d746fd5fb1eb6"
+    }
+  },
+  "validation_reference": {
+    "A": {
+      "final_task_success": 1.0,
+      "attribute_exact": 1.0,
+      "runs_checked": 3,
+      "item_level_changes_across_runs": 0
+    },
+    "B": {
+      "final_task_success": 0.62,
+      "material_accuracy_on_sufficient": 1.0,
+      "routing_exact_on_sufficient": 0.4857142857142857,
+      "required_fields_accuracy_on_missing": 0.9333333333333333,
+      "dangerous_guess_rate_on_missing": 0.06666666666666667,
+      "runs_checked": 3,
+      "item_level_changes_across_runs": 0
+    },
+    "C": {
+      "final_task_success": 1.0,
+      "attribute_exact": 1.0,
+      "deterministic": true
+    },
+    "reproducibility_note": "A Validation was 50/50 in three repeated runs; B Validation was 31/50 in three repeated runs; item-level predictions did not change."
+  },
+  "final_test": {
+    "dataset_file": "data/final_test/final_test_dataset.json",
+    "dataset_name": "bolt_final_test_v1_0",
+    "dataset_sha256": "dbe1470a676623a8cc48706a1aa1dbf15aff1c3cc509ee234bf8400989f4bf06",
+    "total": 100,
+    "condition_counts": {
+      "NORMAL": 30,
+      "VARIANT": 40,
+      "MISSING": 30
+    },
+    "complete_cases": 70,
+    "missing_cases": 30,
+    "execution_status": "COMPLETED",
+    "canonical_run_policy": "One canonical run per system. A run may be discarded and rerun only for a clear technical failure such as server/API interruption; do not select a run based on task metrics.",
+    "canonical_results": {
+      "A_final_task_success": 0.99,
+      "B_final_task_success": 0.76,
+      "C_final_task_success": 0.68
+    },
+    "result_files_sha256": {
+      "results/system_a_final_test.json": "3ab7b087938f1219f3bc85c03dcd30654f6d7740bc2af674b8acbe7d9f707d9f",
+      "results/system_b_final_test.json": "920080595c2fdae15153537d941a28f9416fc75e03cd084565e16558798d552f",
+      "results/system_c_final_test.json": "6536186bf7b2e5693301cde9e1d5f8a3a8e24d7ca85ed9f647e60acdb7c689a9",
+      "results/final_test_unified_evaluation.json": "3619eb9a1726f3fd868a0a06358249f3f3937f4b7ec737f41b1868060bb7b4df",
+      "results/final_test_statistics.json": "e493fc7838d441c17855bef7943a0c965c36ff5820847efd8047fabdaff557ff",
+      "results/final_test_failure_analysis.json": "b1338526ef39895100fa0cc977d33789a8442c7badf6c2e0e158c02ad4ca834b",
+      "results/final_test_failure_analysis.md": "16f19f1a302f50a733740d9ebcc4309800b6418df739ed33c1c53b894265eed7",
+      "results/4b_final_summary.json": "b4a153df00812045a1aa65f92b1723408f5a597394f0863c11ff45e69b543150",
+      "results/4b_final_summary.md": "8591478e2936d83b038ffc58dad2e0200498535e8ed237ad48cabef6af5e65d2"
+    }
+  },
+  "frozen_artifacts_sha256": {
+    "config/model.json": "bf8ddeac443e5a8381421168875fad3095ab0b83a6a9c43f8fbbfb57b8511e34",
+    "config/attributes.json": "13597299edcd22d5024ea6d111a5afc73987b4c430eda4264614d5861785e8e1",
+    "config/rules.json": "f13c75e727ba310ea38975adea443ead7994d800fff7fd734fb4f6b8d626e3c5",
+    "config/extractor_prompt.json": "34468e7ef9405d842dc37cf19b1e5931e33f5c8c9155f8dcdc5976e3e98a4323",
+    "config/extractor_schema.json": "746ef34cd7fb292e3488b83835540a17021b51c2e7038a6d56e9106653ee41f5",
+    "config/system_b_prompt.json": "fadf4be7e11be2eb4710d6071e58ef2cbc8482fe38c6f1fbb6ec621ff4289f1c",
+    "config/system_b_schema.json": "9c4281a5f14485fb67f22ee9aed4c84690efeaf91f9019f52fd4ff69df033e36",
+    "config/system_c.json": "5457bc0a96641ce331e57b9c6039493dac18d9f84bb2770fd86d746fd5fb1eb6",
+    "scripts/run_vllm_server.sh": "b522a38e7ba3f02a2580e8a3b17717a5b76b39deb1290f3574f35f6441c3544d",
+    "src/bolt_thesis/rule_engine.py": "30422a2ede2fd4db4d1be49a0e514622e81861002600eb483583dc8f40949662",
+    "src/bolt_thesis/clients/vllm.py": "db93cf167c9c9962c02c653105d64097b0107a7dde23bf587d8ab716dbe17767",
+    "src/bolt_thesis/clients/vllm_system_b.py": "adf62fa803c1f6a8b7dd10dc5e783bd334b41f0bacdb58a4eaf6d71a95e7a642",
+    "src/bolt_thesis/extractor/prompt.py": "655e7bdf5e8ee6f65efd86758a57721526a498f9d841727493c78c29c402846f",
+    "src/bolt_thesis/system_b/prompt.py": "40adc87f8fdceb1cc94247b7f65eadf5c199e12dda5d2e94ac7782ce878dd338",
+    "src/bolt_thesis/system_c/extractor.py": "0f736389c7db56fabf1298c491572b278f3cf3b301797113876f8fa9020d3b21"
   },
   "previous_development_baseline": {
     "model": "Qwen/Qwen2.5-7B-Instruct",
@@ -28,8 +124,26 @@
     "note": "Qwen2.5-7B-Instruct 기반 개발/Validation 참고 결과이며 Qwen3.5-4B 본 실험 결과와 혼합하지 않는다."
   },
   "freeze_policy": [
-    "Qwen3.5-4B로 System A/B Validation을 다시 실행한다.",
-    "System C까지 Validation을 완료한 뒤 A/B/C 설정을 동결한다.",
-    "Final Test를 확인한 뒤에는 Prompt/Rule/Regex/Model을 수정하지 않는다."
-  ]
+    "Final Test execution begins only after scripts/validate_final_test.py passes and the dataset SHA256 matches this lock file.",
+    "After this lock, Prompt/Rule/Regex/Model/Schema/generation settings and Final Test cases must not be modified based on Final Test outcomes.",
+    "Pilot and Validation remain development data; Final Test is the only frozen evaluation set used for final inferential statistics.",
+    "If a technical failure invalidates a run, record the failure and rerun the entire affected system; never choose among successful runs by performance."
+  ],
+  "integration_provenance": {
+    "source_archive": "bolt_thesis_1012.zip",
+    "integration_version": "v0.12.1",
+    "integration_date": "2026-10-12",
+    "existing_results_preserved": true,
+    "final_test_results_present_at_freeze": false,
+    "formatting_only_differences_verified": [
+      "src/bolt_thesis/rule_engine.py",
+      "src/bolt_thesis/system_b/prompt.py"
+    ]
+  },
+  "post_hoc_model_scale_analysis": {
+    "status": "PLANNED_NOT_RUN",
+    "model": "Qwen/Qwen3.5-9B",
+    "role": "post-hoc model-scale sensitivity analysis",
+    "policy": "Reuse the frozen Final Test and unchanged A/B prompts, rules, schemas, and generation settings; change only the model ID. Do not reinterpret the 9B run as part of the preregistered 4B primary experiment."
+  }
 }

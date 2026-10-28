@@ -1,6 +1,6 @@
 [project]
 name = "bolt-thesis"
-version = "0.6.0"
+version = "0.13.0"
 description = "LLM + rule-engine master's thesis experiment for bolt manufacturing master data"
 requires-python = ">=3.13,<3.15"
 dependencies = [

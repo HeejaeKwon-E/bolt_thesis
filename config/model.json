@@ -1,5 +1,5 @@
 {
-  "experiment_version": "0.3",
+  "experiment_version": "0.4",
   "system": "A",
   "task": "BOLT_ATTRIBUTE_EXTRACTION",
   "model": {
@@ -13,7 +13,8 @@
     "dtype": "auto",
     "max_model_len": 4096,
     "gpu_memory_utilization": 0.9,
-    "generation_config": "vllm"
+    "generation_config": "vllm",
+    "seed": 42
   },
   "generation": {
     "temperature": 0.0,
@@ -26,6 +27,8 @@
     "본 실험 모델은 Qwen/Qwen3.5-4B이며 텍스트 입력만 사용한다.",
     "양자화는 사용하지 않는다.",
     "vLLM 서버는 --generation-config vllm로 실행해 모델 저장소의 generation_config가 실험 샘플링 설정을 덮어쓰지 않도록 한다.",
-    "JSON Schema structured output을 사용하므로 JSON 유효율은 모델 능력보다는 파이프라인 정상동작 지표로 해석한다."
+    "JSON Schema structured output을 사용하므로 JSON 유효율은 모델 능력보다는 파이프라인 정상동작 지표로 해석한다.",
+    "vLLM server seed와 요청 seed는 모두 42로 고정한다.",
+    "VLLM_BATCH_INVARIANT는 Qwen3.5 GDN_ATTN과 vLLM 0.30.0에서 지원되지 않아 사용하지 않는다."
   ]
 }
